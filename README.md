@@ -1,104 +1,77 @@
 # Recycling Game 3D
 
-Juego educativo en 3D sobre clasificación de residuos, desarrollado en **Godot 4.6**.
-El jugador recorre un hangar rodeado de islas flotantes, recoge basura repartida por
-el escenario y la deposita en el basurero correcto antes de que se acabe el tiempo.
+Juego en 3D sobre clasificación de residuos hecho en Godot 4.6. Lo desarrollamos
+para el curso de Gráficos por Computadora de la Universidad Nacional.
 
-> Proyecto del curso de **Gráficos por Computadora** — Universidad Nacional (UNA).
+La idea es sencilla: estás en un hangar rodeado de islas flotantes, la basura aparece
+repartida por todo el escenario y hay que ir recogiéndola y echándola en el basurero
+que le corresponde antes de que se acabe el tiempo.
 
----
+## Cómo se juega
 
-## 🎮 Sobre el juego
+Recorrés el mapa, recogés la basura que vas encontrando y la depositás en el basurero
+correcto. Cada vez que te equivocás de basurero perdés una vida; con tres errores se
+acaba la partida. También hay un cronómetro, así que tampoco podés tardarte demasiado.
+Para ganar hay que clasificar toda la basura antes de que el tiempo llegue a cero.
 
-El objetivo es **clasificar correctamente todos los residuos** del escenario antes de
-que el cronómetro llegue a cero. Cada depósito equivocado cuesta una vida; al perder las
-tres, la partida termina. Un sistema de diálogos con locuciones acompaña la acción dando
-retroalimentación al jugador en cada acierto y cada error.
+Mientras jugás van saliendo diálogos con voces que te dicen si lo estás haciendo bien
+o mal, que fue de las cosas que más nos gustó meterle.
 
-### Características
+## Controles
 
-- Escenario 3D completo: hangar central, anillos de islas flotantes y vehículos decorativos.
-- Generación y dispersión procedural de la basura por el mapa en cada partida.
-- Sistema de recogida y depósito con detección de la categoría correcta.
-- Cronómetro, marcador de puntaje y sistema de vidas (3 por partida).
-- Pantallas de carga, victoria y derrota.
-- Retroalimentación por voz mediante el gestor de diálogos.
-- Renderizado en modo *GL Compatibility* (compatible con equipos modestos y exportación web).
+- Moverse: W A S D o las flechas
+- Correr: Shift
+- Saltar: Espacio
+- Interactuar: E
+- Recoger / depositar: F
+- Cambiar de residuo: G
 
----
+## Las categorías
 
-## ♻️ Categorías de reciclaje
+Manejamos cinco tipos de residuos, cada uno con su basurero:
 
-El juego clasifica los residuos en cinco categorías, cada una asociada a un basurero:
+- Azul: plásticos (botellas, latas, vidrio)
+- Gris: papel y cartón (periódico, caja de pizza, tetrabrik)
+- Verde: orgánicos (restos de comida, cáscaras)
+- Negro: no valorizables (bolsas, residuos contaminados)
+- Tapas: tapas plásticas
 
-| Color del basurero | Categoría            | Ejemplos                                   |
-| ------------------ | -------------------- | ------------------------------------------ |
-| 🔵 Azul            | Plásticos            | Botellas, latas, vidrio reciclable         |
-| ⚪ Gris            | Papel y cartón       | Periódico, caja de pizza, tetrabrik        |
-| 🟢 Verde           | Orgánicos            | Restos de comida, cáscaras                 |
-| ⚫ Negro           | No valorizables      | Bolsas, residuos contaminados              |
-| 🟠 Tapas           | Tapas plásticas      | Tapas de botella                           |
+## Cómo correrlo
 
----
-
-## ⌨️ Controles
-
-| Acción              | Tecla            |
-| ------------------- | ---------------- |
-| Mover               | `W` `A` `S` `D` / Flechas |
-| Correr              | `Shift`          |
-| Saltar              | `Espacio`        |
-| Interactuar         | `E`              |
-| Recoger / depositar | `F`              |
-| Cambiar de residuo  | `G`              |
-
----
-
-## 🛠️ Tecnologías
-
-- **Motor:** Godot Engine 4.6
-- **Lenguaje:** GDScript
-- **Física:** Jolt Physics
-- **Renderizado:** GL Compatibility
-
----
-
-## 🚀 Cómo ejecutar
-
-1. Instalar [Godot 4.6](https://godotengine.org/download) (versión estándar, no .NET).
-2. Clonar el repositorio:
-   ```bash
+1. Instalá Godot 4.6 (la versión normal, no la de .NET): https://godotengine.org/download
+2. Clonás el repo:
+   ```
    git clone https://github.com/Glend-2003/recycling-game-3d.git
    ```
-3. Abrir Godot, pulsar **Importar** y seleccionar el archivo `project.godot` del proyecto.
-4. Ejecutar con **F5** o el botón ▶ de reproducción.
+3. Abrís Godot, le das a Importar y elegís el archivo `project.godot`.
+4. Corrés con F5.
 
-> En el primer arranque Godot regenerará la carpeta de caché `.godot/` e importará los
-> recursos; el proceso puede tardar un poco por el tamaño de los modelos 3D.
+La primera vez Godot tarda un rato importando los modelos y generando la carpeta
+`.godot`, así que no te asustés si no abre de una.
 
----
+## Cómo está armado el proyecto
 
-## 📁 Estructura del proyecto
+- `main.tscn` / `main.gd`: la escena principal y casi toda la lógica del juego.
+- `player.tscn` / `player.gd`: el jugador y su movimiento.
+- `pickup_system.gd`: la parte de recoger y depositar la basura.
+- `trash_item.gd` / `trash_spawner.gd`: los residuos y cómo se reparten por el mapa.
+- `categorias.gd` / `catalogo_basura.gd`: las categorías y el catálogo de modelos.
+- `DialogueManager.gd`: los diálogos y las voces.
+- `loading.tscn`, `introduction.tscn`, `mainMenu.tscn`: pantallas de carga, intro y menú.
+- `audio/`: la música y las locuciones.
+- `Game 3D/`: modelos y recursos extra.
+- El resto de archivos `.glb`, `.jpg` y `.png` son los modelos, texturas e imágenes
+  de la interfaz.
 
-```
-recycling-game-3d/
-├── project.godot          # Configuración del proyecto Godot
-├── main.tscn / main.gd    # Escena principal y lógica de juego
-├── player.tscn / player.gd        # Jugador y movimiento
-├── pickup_system.gd               # Sistema de recoger y depositar basura
-├── trash_item.gd / trash_spawner.gd   # Residuos y su generación
-├── categorias.gd / catalogo_basura.gd # Categorías y catálogo de modelos
-├── DialogueManager.gd             # Gestor de diálogos y locuciones
-├── loading.tscn / introduction.tscn   # Pantallas de carga e introducción
-├── mainMenu.tscn                  # Menú principal
-├── audio/                 # Música y locuciones
-├── Game 3D/               # Recursos gráficos adicionales
-└── *.glb / *.jpg / *.png  # Modelos 3D, texturas e imágenes de interfaz
-```
+## Detalles técnicos
 
----
+- Motor: Godot 4.6
+- Lenguaje: GDScript
+- Física: Jolt Physics
+- Renderizado en modo GL Compatibility, para que corra sin problemas en equipos
+  no tan potentes.
 
-## 👥 Créditos
+## Sobre el proyecto
 
-Desarrollado como proyecto académico para el curso de Gráficos por Computadora de la
-Universidad Nacional (UNA). Modelos y assets 3D integrados y adaptados para el juego.
+Esto lo hicimos como trabajo del curso de Gráficos por Computadora en la UNA. Varios
+de los modelos y sonidos son recursos externos que adaptamos e integramos al juego.
