@@ -1,0 +1,13 @@
+# Godot 4+ specific ignores
+.godot/
+
+# Godot export / build artifacts
+/android/
+/web_export/
+/export/
+*.tmp
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
